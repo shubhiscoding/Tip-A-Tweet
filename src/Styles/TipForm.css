@@ -1,0 +1,154 @@
+/* TipForm Styles */
+.App{
+    background-color:#1e1e1e;
+    min-height:100vh;
+    padding:1rem;
+}
+.TipForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #1e1e2e; /* Dark background */
+    color: #ffffff;
+    width: 100%;
+    min-width: 40vw;
+    min-height: 40vh;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+
+.TipForm .labels {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 33vw;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.TipForm button {
+    padding: 1rem 4rem;
+    border-radius: 20px;
+    background-color: #4e44ce; /* Neon accent */
+    color: #ffffff;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.TipForm button:hover {
+    background-color: #6c63ff; /* Lighter neon shade on hover */
+    box-shadow: 0 0 10px rgba(108, 99, 255, 0.7);
+    cursor: pointer;
+}
+
+.TipForm input[type="text"]{
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    font-size: 20px;
+    min-width: 30vw;
+    background-color: #2e2e3e;
+    color: #ffffff;
+    border: 1px solid #4e44ce;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+
+.TipForm input[type="Number"]{
+    min-width: 18vw;
+    height:100%;
+    min-height:3vh;
+    background-color: #2e2e3e;
+    color: #ffffff;
+    border: 1px solid #4e44ce;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+.ammount {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 30vw;
+    width:100%;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    font-size: 20px;
+    background-color: #2e2e3e;
+    color: #ffffff;
+    border: 1px solid #4e44ce;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.TipForm input[type="text"]:focus,
+.TipForm input[type="number"]:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 10px rgba(108, 99, 255, 0.7);
+}
+
+.TipForm span {
+    margin-left: 10px;
+}
+
+/* TweetPreview Styles */
+.TweetPreview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow: hidden; /* Prevent overflow */
+}
+
+.TweetPreview .twitter-tweet {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    background-color: #2e2e3e; /* Dark background */
+    padding: 1rem;
+    gap: 20px;
+    width: 80%; /* Ensure it doesn't take too much space */
+    margin: 1rem 0;
+    overflow: hidden; /* Prevent overflow */
+}
+
+.TweetPreview .twitter-tweet iframe {
+    transform-origin: top left;
+    width: 100%; /* Ensure responsiveness */
+    margin: 0;
+    border-radius: 10px;
+    min-width: 400px;
+    max-height: 500px;
+    overflow: hidden; /* Prevent overflow */
+}
+
+.TweetPreview .confirm-btn {
+    padding: 0.5rem 2rem;
+    border-radius: 15px;
+    background-color: #4e44ce; /* Neon accent */
+    color: #ffffff;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.TweetPreview .confirm-btn:hover {
+    background-color: #6c63ff; /* Lighter neon shade on hover */
+    box-shadow: 0 0 10px rgba(108, 99, 255, 0.7);
+    cursor: pointer;
+}
+
+.tweet {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: row;
+    overflow: hidden; /* Prevent overflow */
+}

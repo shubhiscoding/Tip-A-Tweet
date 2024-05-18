@@ -1,0 +1,41 @@
+/* NavBar Styles */
+.NavBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1e1e2e; /* Dark background */
+    color: #ffffff;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    font-size: 18px;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+.nav-logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-logo a {
+    color: #4e44ce; /* Neon accent */
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    background-color: #6c63ff; /* Lighter neon shade on hover */
+    box-shadow: 0 0 10px rgba(108, 99, 255, 0.7);
+}

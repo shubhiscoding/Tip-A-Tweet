@@ -1,22 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import NavBar from './Components/NavBar';
+import TipForm from './Components/TipForm';
+import TwitterLogin from './Components/TwitterLogin';
+import "./Styles/TipForm.css"
+import { BrowserRouter as Route } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <NavBar />
+        <TipForm />
+        <TwitterLogin />
       </header>
     </div>
   );
