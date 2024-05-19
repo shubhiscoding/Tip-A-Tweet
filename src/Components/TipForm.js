@@ -16,6 +16,7 @@ const TipForm = () => {
       console.log(Username);
     }
     setShowPreview(true);
+    document.getElementById("preview").scrollIntoView({ behavior: "smooth" });
   };
 
   const paytip = async () => {
@@ -106,7 +107,7 @@ const TipForm = () => {
         onChange={handleInputChange(setTip)}
       />
       <div className="labels">
-        <button onClick={tipform} href="#preview">Tip the tweet</button>
+        <button onClick={tipform}>Tip the tweet</button>
       </div>
       {showPreview && Username && (
         <div className="tweet" id="preview">
