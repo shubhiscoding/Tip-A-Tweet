@@ -1,4 +1,8 @@
 /* TipForm Styles */
+html {
+    scroll-behavior: smooth;
+}
+
 .App{
     background-color:#1e1e1e;
     min-height:175vh;
