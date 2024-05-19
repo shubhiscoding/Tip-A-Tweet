@@ -1,0 +1,44 @@
+.home {
+    display: flex; /* Allow image and text to be side-by-side */
+    flex-direction: column;
+    align-items: end; /* Vertically center content */
+    justify-content: end; /* Distribute content evenly */
+    padding: 2rem; /* Add some padding for spacing */
+    background-image: url("https://mazerspace.com/wp-content/uploads/2022/09/creator-economy-in-metaverse.jpg");
+    background-repeat: no-repeat;
+    background-size: cover; /* Stretch image to fill container */
+    background-position: center; /* Center image horizontally and vertically */
+    color: #fff; /* Set text color to white for contrast */
+    min-height: 40vh; /* Set height to 100% of viewport height */
+  }
+  
+  .home h1 {
+    font-size: 2.5rem; /* Adjust font size as needed */
+    font-weight: bold;
+    margin-bottom: 1rem; /* Add some space below the heading */
+    margin-top: 8rem; /* Add some space above the heading */
+  }
+  
+  .home p {
+    font-size: 1.1rem; /* Adjust font size as needed */
+    line-height: 1.5; /* Set line spacing for better readability */
+    max-width: 40vw; /* Limit text width to prevent overlapping content */
+  }
+
+  .buttons{
+    display: flex; /* Allow image and text to be side-by-side */
+    flex-direction: row;
+    min-width: 25vw;
+    justify-content: space-around; /* Distribute content evenly */
+    padding:0;
+  }
+  
+  button {
+    padding: 1rem 4rem;
+    border-radius: 20px;
+    background-color: #4e44ce; /* Neon accent */
+    color: #ffffff;
+    border: none;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+  }

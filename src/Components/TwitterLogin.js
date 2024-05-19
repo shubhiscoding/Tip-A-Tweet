@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
-import { signInWithPopup, signOut, TwitterAuthProvider, onAuthStateChanged } from "firebase/auth";
+import {
+  signInWithPopup,
+  signOut,
+  TwitterAuthProvider,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { auth } from "../Firebase/firebase"; // Adjust the import path if needed
-import '../Styles/TwitterLogin.css';
+import "../Styles/TwitterLogin.css";
+
+import Withdraw from "./Withdraw";
 
 const TwitterLogin = () => {
   const [user, setUser] = useState(null);
   const [Username, setUsername] = useState(null);
-  const [signer, setSigner] = useState(null); // Add this line  
+  const [signer, setSigner] = useState(null); // Add this line
   const [Tip, setTip] = useState(null);
 
   const handleTwitterLogin = async () => {
@@ -17,7 +24,7 @@ const TwitterLogin = () => {
         .then((userCredential) => {
           const screenName = userCredential.user.reloadUserInfo.screenName;
           setUsername(screenName);
-          localStorage.setItem('Username', screenName);
+          localStorage.setItem("Username", screenName);
           console.log(screenName);
         })
         .catch((error) => {
@@ -32,11 +39,30 @@ const TwitterLogin = () => {
     try {
       await signOut(auth);
       setUser(null);
-      localStorage.removeItem('Username');
+      localStorage.removeItem("Username");
       setUsername(null);
       setTip(null);
+      disconnectWallet();
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const disconnectWallet = async () => {
+    // Logic to disconnect the user's wallet
+    if (window.ethereum && window.ethereum.isConnected()) {
+      try {
+        await window.ethereum.request({
+          method: "wallet_requestPermissions",
+          params: [
+            {
+              eth_accounts: {},
+            },
+          ],
+        });
+      } catch (error) {
+        console.error("Failed to disconnect wallet:", error);
+      }
     }
   };
 
@@ -44,7 +70,7 @@ const TwitterLogin = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        const storedUsername = localStorage.getItem('Username');
+        const storedUsername = localStorage.getItem("Username");
         if (storedUsername) {
           setUsername(storedUsername);
         }
@@ -56,62 +82,22 @@ const TwitterLogin = () => {
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-    if (Username) {
-      paytip();
-    }
-  }, [Username]);
-
-  const paytip = async () => {
-    try {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      await provider.send("eth_requestAccounts", []);
-
-      const sign = await provider.getSigner();
-      setSigner(sign);
-      const contractAddress = "0x2d61C3fe1188CFb16ABaA387c7F66Fedfa8D3158";
-      const contractABI = [
-        "function ammountOfTip(string memory username) public view returns (uint256)"
-      ];
-
-      const contract = new ethers.Contract(contractAddress, contractABI, signer);
-
-      const tx = await contract.ammountOfTip(Username);
-
-      setTip(tx.toString());
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const withdraw = async () => {
-    const contractAddress = "0x2d61C3fe1188CFb16ABaA387c7F66Fedfa8D3158";
-    const withdrawABI = ["function withdraw(string memory username) public"];
-    const contract = new ethers.Contract(contractAddress, withdrawABI, signer);
-    const tx = await contract.withdraw(Username);
-    tx.wait()
-    .then((receipt) => {
-      console.log("Withdrawn");
-      console.log(receipt['hash']);
-    })
-    console.log(tx);
-  };
-
   return (
-    <div className="TwitterLogin">
+    <div className="TwitterLogin" id="claim-tips">
+      <h1>Claim Your Tips</h1>
       {user ? (
         <div>
-          <h1>Welcome, {Username}!</h1>
-          {Tip && <div>
-            <p>You have {ethers.formatEther(Tip.toString())} tips!</p>
-            <button onClick={withdraw} className="twitter-withdraw-btn">Withdraw</button>
-            </div>}
-          <button onClick={handleLogout} className="twitter-logout-btn">Logout</button>
+          <h2>Welcome, {Username}!</h2>
+          <Withdraw Username={Username} />
+          <button onClick={handleLogout} className="twitter-logout-btn">
+            Logout
+          </button>
         </div>
       ) : (
         <div>
-          <h1>Claim Your Tips</h1>
-          <button onClick={handleTwitterLogin} className="twitter-login-btn">Login with Twitter</button>
+          <button onClick={handleTwitterLogin} className="twitter-login-btn">
+            Login with Twitter
+          </button>
         </div>
       )}
     </div>
@@ -119,3 +105,11 @@ const TwitterLogin = () => {
 };
 
 export default TwitterLogin;
+
+// {Tip && Tip!=null && <div>
+//   <div className='balance'>
+//   <p>You have {ethers.formatEther(Tip.toString())} tips!</p>
+//   <button className='refresh'>Refresh</button>
+//   </div>
+//   <button onClick={withdraw} className="twitter-withdraw-btn">Withdraw</button>
+//   </div>}
