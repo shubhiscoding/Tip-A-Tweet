@@ -1,7 +1,6 @@
 import { useState } from "react";
 import TweetPreview from "./TweetPreview";
 import { ethers, parseEther } from "ethers";
-import { set } from "firebase/database";
 // import { parseEther } from "ethers/lib/utils";
 
 const TipForm = () => {
@@ -107,10 +106,10 @@ const TipForm = () => {
         onChange={handleInputChange(setTip)}
       />
       <div className="labels">
-        <button onClick={tipform}>Tip the tweet</button>
+        <button onClick={tipform} href="#preview">Tip the tweet</button>
       </div>
       {showPreview && Username && (
-        <div className="tweet">
+        <div className="tweet" id="preview">
           {" "}
           <TweetPreview url={Url} payTip={paytip} />{" "}
         </div>
