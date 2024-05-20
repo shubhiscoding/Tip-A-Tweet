@@ -1,5 +1,6 @@
 {
   "name": "twitter-tipper",
+  "homepage": "https://shubhiscoding.github.io/Tip-A-Tweet/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,6 +14,7 @@
     "ethers": "^6.12.1",
     "express": "^4.19.2",
     "firebase": "^10.12.0",
+    "gh-pages": "^6.1.1",
     "querystring": "^0.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -23,6 +25,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

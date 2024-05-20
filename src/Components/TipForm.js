@@ -59,6 +59,10 @@ const TipForm = (provider) => {
 
 
   const tipform = async () => {
+    if(!Url || !Tip){
+      alert("Please enter a valid tweet url and tip amount");
+      return;
+    }
     if (Url) {
       const parts = Url.split("/");
       setUsername(parts[3]);
@@ -158,7 +162,7 @@ const TipForm = (provider) => {
       <input
         type="number"
         className="tweetInput"
-        placeholder="Enter your tip in Matics"
+        placeholder="Enter your tip Amount"
         onChange={handleInputChange(setTip)}
       />
       <div className="labels">
