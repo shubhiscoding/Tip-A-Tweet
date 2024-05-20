@@ -11,11 +11,17 @@ import "../Styles/TwitterLogin.css";
 
 import Withdraw from "./Withdraw";
 
-const TwitterLogin = () => {
+const TwitterLogin = (currentProvider) => {
   const [user, setUser] = useState(null);
   const [Username, setUsername] = useState(null);
   const [signer, setSigner] = useState(null); // Add this line
   const [Tip, setTip] = useState(null);
+  const networkProvider = currentProvider['currentProvider'];
+
+  const data = {
+    networkProvider: networkProvider,
+    Username: Username
+  };
 
   const handleTwitterLogin = async () => {
     const provider = new TwitterAuthProvider();
@@ -88,7 +94,7 @@ const TwitterLogin = () => {
       {user ? (
         <div>
           <h2>Welcome, {Username}!</h2>
-          <Withdraw Username={Username} />
+          <Withdraw data={data} />
           <button onClick={handleLogout} className="twitter-logout-btn">
             Logout
           </button>
@@ -105,11 +111,3 @@ const TwitterLogin = () => {
 };
 
 export default TwitterLogin;
-
-// {Tip && Tip!=null && <div>
-//   <div className='balance'>
-//   <p>You have {ethers.formatEther(Tip.toString())} tips!</p>
-//   <button className='refresh'>Refresh</button>
-//   </div>
-//   <button onClick={withdraw} className="twitter-withdraw-btn">Withdraw</button>
-//   </div>}

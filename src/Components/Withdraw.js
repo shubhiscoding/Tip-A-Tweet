@@ -2,36 +2,70 @@ import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import "../Styles/TwitterLogin.css";
 
-const Withdraw = (userName) => {
+const Withdraw = (data) => {
   const [Tip, setTip] = useState(null);
   const [signer, setSigner] = useState(null);
-  const Username = userName["Username"];
-  const disconnectWallet = async () => {
-    // Logic to disconnect the user's wallet
-    if (window.ethereum && window.ethereum.isConnected()) {
-      try {
-        await window.ethereum.request({
-          method: "wallet_requestPermissions",
-          params: [
-            {
-              eth_accounts: {},
-            },
-          ],
-        });
-      } catch (error) {
-        console.error("Failed to disconnect wallet:", error);
+  const Username = data['data']["Username"];
+  const currentProvider = data['data']["networkProvider"];
+
+  const networkParams = {
+    "Sepolia ETH": {
+      chainId: "0xaa36a7", // Chain ID for Sepolia
+      chain: "11155111",
+      chainName: "Sepolia Test Network",
+      rpcUrls: ["https://rpc.sepolia.org"],
+      nativeCurrency: { name: "Ethereum", symbol: "ETH", decimals: 18 },
+      blockExplorerUrls: ["https://sepolia.etherscan.io"],
+      contractAddress: "0x6Bf6dc601F0eD1E688b5a49c48d75696057099F4",
+    },
+    "Amoy Matic": {
+      chainId: "0x13882", // Chain ID for Mumbai (Polygon Testnet)
+      chain: "80002",
+      chainName: "Amoy Test Network",
+      rpcUrls: ["https://rpc-amoy.polygon.technology/"],
+      nativeCurrency: { name: "Matic", symbol: "MATIC", decimals: 18 },
+      blockExplorerUrls: ["https://www.oklink.com/amoy"],
+      contractAddress: "0x2d61C3fe1188CFb16ABaA387c7F66Fedfa8D3158",
+    },
+  };
+
+  const ContractAdd = networkParams[currentProvider].contractAddress;
+
+
+  const switchNetwork = async () => {
+    if (!window.ethereum) throw new Error("No crypto wallet found");
+    try {
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: networkParams[currentProvider].chainId }],
+      });
+    } catch (switchError) {
+      // This error code indicates that the chain has not been added to MetaMask
+      if (switchError.code === 4902) {
+        try {
+          await window.ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [networkParams[currentProvider]],
+          });
+        } catch (addError) {
+          console.error(addError);
+        }
+      } else {
+        console.error(switchError);
       }
     }
   };
 
+
   const paytip = async () => {
     try {
+      switchNetwork();
       const provider = new ethers.BrowserProvider(window.ethereum);
       await provider.send("eth_requestAccounts", []);
 
       const sign = await provider.getSigner();
       setSigner(sign);
-      const contractAddress = "0x2d61C3fe1188CFb16ABaA387c7F66Fedfa8D3158";
+      const contractAddress = ContractAdd;
       const contractABI = [
         "function ammountOfTip(string memory username) public view returns (uint256)",
       ];
@@ -51,7 +85,8 @@ const Withdraw = (userName) => {
   };
 
   const withdraw = async () => {
-    const contractAddress = "0x2d61C3fe1188CFb16ABaA387c7F66Fedfa8D3158";
+    switchNetwork();
+    const contractAddress = ContractAdd;
     const withdrawABI = ["function withdraw(string memory username) public"];
     const contract = new ethers.Contract(contractAddress, withdrawABI, signer);
     const tx = await contract.withdraw(Username);

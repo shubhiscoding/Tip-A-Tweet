@@ -4,8 +4,10 @@ import TwitterLogin from "./Components/TwitterLogin";
 import "./Styles/TipForm.css";
 import "./App.css";
 import { BrowserRouter as Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [currentProvider, setCurrentProvider] = useState("Sepolia ETH");
   const claimtip = () => {
     document
       .getElementById("claim-tips")
@@ -16,6 +18,19 @@ function App() {
       .getElementById("Tip-A-Tweet")
       .scrollIntoView({ behavior: "smooth" });
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("currentProvider")) {
+      setCurrentProvider(localStorage.getItem("currentProvider"));
+    }
+  }, []);
+
+  const handleInputChange = (setter) => (e) => {
+    setter(e.target.value); // Hide the preview when any input changes
+    localStorage.setItem("currentProvider", e.target.value);
+    window.location.reload();
+  };
+
   return (
     <div className="App">
       <header className="App-header" id="home">
@@ -33,8 +48,19 @@ function App() {
             <button onClick={tipatweet}>Tip-A-Tweet</button>
           </div>
         </div>
-        <TipForm />
-        <TwitterLogin />
+        <div className="Networks">
+          <select
+            id="providerSelect"
+            value={currentProvider}
+            className="inputs"
+            onChange={handleInputChange(setCurrentProvider)}
+          >
+            <option value="Sepolia ETH">Sepolia ETH</option>
+            <option value="Amoy Matic">Amoy Matic</option>
+          </select>
+        </div>
+        <TipForm provider={currentProvider}/>
+        <TwitterLogin currentProvider={currentProvider}/>
       </header>
     </div>
   );
