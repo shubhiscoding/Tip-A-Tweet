@@ -68,6 +68,14 @@ const TipForm = (provider) => {
       setUsername(parts[3]);
       console.log(Username);
     }
+    if(!Username){
+      alert("Please enter a valid tweet url");
+      return;
+    }
+    if(Tip<=0){
+      alert("Please enter a valid tip amount");
+      return;
+    }
     setShowPreview(true);
   };
 
