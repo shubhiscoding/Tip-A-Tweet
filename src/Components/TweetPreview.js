@@ -4,10 +4,12 @@ import { TwitterTweetEmbed } from "react-twitter-embed";
 const TweetPreview = ({ url, payTip }) => {
   const [tweetId, setTweetId] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [Username, setUsername] = useState("");
 
   useEffect(() => {
     const extractTweetId = (url) => {
       const parts = url.split("/");
+      setUsername(parts[3]);
       return parts[parts.length - 1];
     };
 
@@ -28,6 +30,9 @@ const TweetPreview = ({ url, payTip }) => {
     const container = document.getElementsByClassName("twitter-tweet")[0];
     if (container) {
       const button = document.createElement("button");
+      const createUsr = document.createElement("h3");
+      createUsr.innerText = "Username: " + Username;
+      container.appendChild(createUsr);
       button.classList.add("confirm-btn");
       button.innerText = "Confirm";
       container.appendChild(button);

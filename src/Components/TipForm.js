@@ -65,13 +65,14 @@ const TipForm = (provider) => {
     }
     if (Url) {
       const parts = Url.split("/");
+      if(parts.length<6){
+        alert("Please enter a valid tweet url: https://x.com/username/status/{tweetID: 1791806895335837804}");
+        return;
+      
+      }
       setUsername(parts[3]);
-      console.log(Username);
     }
-    if(!Username){
-      alert("Please enter a valid tweet url");
-      return;
-    }
+    console.log(Username);
     if(Tip<=0){
       alert("Please enter a valid tip amount");
       return;
@@ -88,6 +89,7 @@ const TipForm = (provider) => {
   const paytip = async () => {
     try {
       await switchNetwork();
+      console.log(Username);
       const provider = new ethers.BrowserProvider(window.ethereum);
       // Request account access if needed
       await provider.send("eth_requestAccounts", []);
