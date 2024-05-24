@@ -1,0 +1,86 @@
+.home {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: center;
+    height: 100%; /* Adjusted height */
+    background-color: #010001;
+    color: white;
+    padding-left: 8rem;
+}
+
+.home-content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    width: fit-content;
+    color: #fff;
+    text-align: left;
+}
+
+.home-content h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    min-width: 100%;
+    color: white;
+    margin: 0;
+}
+
+.home-content p {
+    font-size: 1.5rem;
+    color: white;
+    max-width: 80%;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 40%;
+    margin-top: 2rem;
+}
+
+button {
+    border-radius: 30px;
+    border: 2px solid white;
+    padding: 0.5rem 2.3rem;
+    font-size: 1.5rem;
+    color: white;
+    background-color: #010001;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: white;
+    color: #010001;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.home-image {
+    width: 60%;
+    height: 100%; /* Set the height of .home-image to 100% */
+    margin-bottom: -1px; /* Remove any default margin on the image */
+}
+
+.home-image img {
+    width: 100%;
+    object-fit: cover; /* Ensures the image covers the entire container */
+}
+
+.texts{
+   display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100vh;
+    width: 100%;
+}
+
+.tittle {
+    font-size: 6rem;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+}

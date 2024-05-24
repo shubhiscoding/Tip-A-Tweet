@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  background-color: #1e1e2e; /* Dark background */
+  align-items: start;
+  background-color: #010001; /* Dark background */
   color: #ffffff;
   width: 100%;
   min-width: 40vw;
@@ -13,39 +13,60 @@
   padding: 2rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
   box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
-  margin-top: 1rem;
+  margin-top: 6rem;
 }
 
-.twitter-login-btn,
-.twitter-logout-btn {
-  padding: 1rem 4rem;
-  border-radius: 20px;
-  background-color: #4e44ce; /* Neon accent */
-  color: #ffffff;
-  border: none;
-  transition: all 0.3s ease;
-  margin-top: 1rem;
-}
+
 
 .twitter-withdraw-btn {
-  padding: 1rem 3.5rem;
+  padding: 0.5rem 1.3rem;
   border-radius: 20px;
-  background-color: #4e44ce; /* Neon accent */
+  background-color: #010001; /* Neon accent */
   color: #ffffff;
-  border: none;
+  border-radius: 30px;
+  border: 2px solid white;
   transition: all 0.3s ease;
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
-.twitter-login-btn:hover,
-.twitter-logout-btn:hover {
-  background-color: #6c63ff; /* Lighter neon shade on hover */
-  box-shadow: 0 0 10px rgba(108, 99, 255, 0.7);
-  cursor: pointer;
+.User-details{
+  display: flex;
+  flex-direction: column;
+  width:50vw;
+  margin-top: 1rem;
+  margin-left: 14rem;
+}
+
+.name{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width:100%;
+}
+
+.withdraw-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  width: 100%;
+  margin-top: 1rem;
+
 }
 
 .TwitterLogin h1 {
-  margin-bottom: 1rem;
+  margin-bottom: 4rem;
+  font-weight: 300;
+  font-size: 6rem;
+}
+
+.TwitterLogin h2 {
+  font-size: 4rem;
+}
+
+.tip-blue {
+  color: #4c1eb8;
 }
 
 .balance {
@@ -55,20 +76,49 @@
   align-items: center;
 }
 
-.balance button {
-  padding: 0.8rem 2rem;
-  border-radius: 20px;
-  background-color: #4e44ce; /* Neon accent */
-  color: #ffffff;
-  border: none;
-  transition: all 0.3s ease;
-  margin-top: 0;
-  scale: 0.8;
-  font-size: 1.2rem;
+.balance p {
+  font-size: 2.5rem;
 }
 
-button:hover {
-    background-color: #6c63ff; /* Lighter neon shade on hover */
-    box-shadow: 0 0 10px rgba(108, 99, 255, 0.7);
-    cursor: pointer;
+.balance button {
+  border-radius: 30px;
+  border: 2px solid white;
+  padding: 0.5rem 1.3rem;
+  margin-left: 1rem;
+  font-size: 0.8rem;
+  color: white;
+  background-color: #010001;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.twitter-logout-btn {
+  border-radius: 30px;
+  border: 2px solid white;
+  padding: 0.5rem 2.3rem;
+  font-size: 1.5rem;
+  color: white;
+  background-color: #010001;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  max-width: 15%;
+}
+
+.refresh:hover{
+  background-color: white;
+  color: #010001;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-height: 2vw;
+  min-height: 2vw;
+  height: 100%;
 }

@@ -1,0 +1,7 @@
+.loading {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    min-height: 2vw;
+    max-height: 2vw;
+}

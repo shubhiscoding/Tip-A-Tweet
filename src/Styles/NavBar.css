@@ -3,18 +3,23 @@ html {
     scroll-behavior: smooth;
 }
 
-
 .NavBar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #1e1e2e; /* Dark background */
-    color: #ffffff;
-    padding: 1rem 2rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     font-size: 18px;
     border-radius: 10px;
-    margin-bottom: 2rem;
+    color: white;
+    padding-left: 6rem;
+    padding-right: 4rem;
+    font-size: 2rem;
+    margin:0;
+}
+
+.nav-logo h1{
+    font-size: 4rem;
+    font-weight: bold;
+    color: white;
 }
 
 .nav-logo {
@@ -25,11 +30,6 @@ html {
 .nav-logo a {
     color: #4e44ce; /* Neon accent */
     text-decoration: none;
-}
-
-.nav-links {
-    display: flex;
-    gap: 1rem;
 }
 
 .nav-links a {
@@ -44,3 +44,29 @@ html {
     background-color: #6c63ff; /* Lighter neon shade on hover */
     box-shadow: 0 0 10px rgba(108, 99, 255, 0.7);
 }
+
+.Networks {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    padding-top: 1rem; /* Remove any padding */
+    padding-right: 4rem;
+    background-color: #010001;
+    color: #fff;
+    margin: 0; /* Remove any margin */
+  }
+  
+  .Networks select {
+    padding: 0.5rem 6rem;
+    border-radius: 20px;
+    font-size: 20px;
+    background-color: #010001;
+    color: #ffffff;
+    border: 1px solid white;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    max-width: 30vw;
+    width: 100%;
+  }

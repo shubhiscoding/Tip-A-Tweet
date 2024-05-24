@@ -8,22 +8,31 @@ html {
     min-height:175vh;
     padding:1rem;
 }
+
+.Tip-Page{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.Tip-Page img{
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
 .TipForm {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: start;
+    margin-top: 10rem;
     align-items: center;
-    background-color: #1e1e2e; /* Dark background */
     color: #ffffff;
     width: 100%;
-    min-width: 40vw;
-    min-height: 40vh;
     font-size: 20px;
     border-radius: 10px;
     padding: 2rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
-    margin-top:1rem;
 }
 
 .TipForm .labels {
@@ -45,11 +54,6 @@ html {
     transition: all 0.3s ease;
 }
 
-.TipForm button:hover {
-    background-color: #6c63ff; /* Lighter neon shade on hover */
-    box-shadow: 0 0 10px rgba(108, 99, 255, 0.7);
-    cursor: pointer;
-}
 
 .TipForm input[type="text"], 
 .TipForm input[type="Number"]{

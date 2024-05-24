@@ -90,14 +90,12 @@ const TwitterLogin = (currentProvider) => {
 
   return (
     <div className="TwitterLogin" id="claim-tips">
-      <h1>Claim Your Tips</h1>
+      <div className="name"><h1>Claim Your <span className="tip-blue">Tips</span></h1></div>
       {user ? (
-        <div>
-          <h2>Welcome, {Username}!</h2>
+        <div className="User-details">
+          <h2>Hii, {Username}!</h2>
           <Withdraw data={data} />
-          <button onClick={handleLogout} className="twitter-logout-btn">
-            Logout
-          </button>
+          <button onClick={handleLogout} className="twitter-logout-btn">Logout</button>
         </div>
       ) : (
         <div>

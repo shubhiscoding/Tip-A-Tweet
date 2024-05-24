@@ -25,24 +25,26 @@ const TweetPreview = ({ url, payTip }) => {
   }, [url]);
 
   const handleTweetLoad = () => {
-    console.log(payTip);
-    setLoading(false);
-    const container = document.getElementsByClassName("twitter-tweet")[0];
-    if (container) {
-      const button = document.createElement("button");
-      const createUsr = document.createElement("h3");
-      createUsr.innerText = "Username: " + Username;
-      container.appendChild(createUsr);
-      button.classList.add("confirm-btn");
-      button.innerText = "Confirm";
-      container.appendChild(button);
-      button.addEventListener("click", () => payTip());
+    try{
+      setLoading(false);
+      const container = document.getElementsByClassName("twitter-tweet")[0];
+      if (container) {
+        const button = document.createElement("button");
+        const createUsr = document.createElement("h3");
+        createUsr.innerText = "Username: " + Username;
+        container.appendChild(createUsr);
+        button.classList.add("confirm-btn");
+        button.innerText = "Confirm";
+        container.appendChild(button);
+        button.addEventListener("click", () => payTip());
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
   return (
     <div className="TweetPreview">
-      {loading && <p>Loading...</p>}
       {tweetId && (
         <div>
           <TwitterTweetEmbed tweetId={tweetId} onLoad={handleTweetLoad} />

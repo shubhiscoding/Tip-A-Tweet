@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
 import TweetPreview from "./TweetPreview";
 import { ethers } from "ethers";
+import Loading from "./loading";
+import "../Styles/loading.css";
+import ether from "../Assets/ether.jpg";
 
 const TipForm = (provider) => {
   const [Username, setUsername] = useState("");
   const [Url, setUrl] = useState("");
   const [Tip, setTip] = useState(0);
   const [showPreview, setShowPreview] = useState(false);
-  const currentProvider = provider['provider'];
+  const currentProvider = provider["provider"];
+  const [loading, setLoading] = useState(false);
+  const [TransactionProcessing, setTransactionProcessing] = useState(false);
+  const [TipSent, setTipSent] = useState("");
+  const [Explorer, setExplorer] = useState("");
 
   const networkParams = {
     "Sepolia ETH": {
@@ -16,7 +23,7 @@ const TipForm = (provider) => {
       chainName: "Sepolia Test Network",
       rpcUrls: ["https://rpc.sepolia.org"],
       nativeCurrency: { name: "Ethereum", symbol: "ETH", decimals: 18 },
-      blockExplorerUrls: ["https://sepolia.etherscan.io"],
+      blockExplorerUrls: ["https://sepolia.etherscan.io/tx/"],
       contractAddress: "0x6Bf6dc601F0eD1E688b5a49c48d75696057099F4",
     },
     "Amoy Matic": {
@@ -25,7 +32,7 @@ const TipForm = (provider) => {
       chainName: "Amoy Test Network",
       rpcUrls: ["https://rpc-amoy.polygon.technology/"],
       nativeCurrency: { name: "Matic", symbol: "MATIC", decimals: 18 },
-      blockExplorerUrls: ["https://www.oklink.com/amoy"],
+      blockExplorerUrls: ["https://www.oklink.com/amoy/tx/"],
       contractAddress: "0x2d61C3fe1188CFb16ABaA387c7F66Fedfa8D3158",
     },
   };
@@ -34,7 +41,6 @@ const TipForm = (provider) => {
 
   const switchNetwork = async () => {
     if (!window.ethereum) throw new Error("No crypto wallet found");
-    console.log(currentProvider, ContractAdd);
     try {
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
@@ -57,62 +63,75 @@ const TipForm = (provider) => {
     }
   };
 
-
   const tipform = async () => {
-    if(!Url || !Tip){
+    if (!Url || !Tip) {
       alert("Please enter a valid tweet url and tip amount");
       return;
     }
     if (Url) {
       const parts = Url.split("/");
-      if(parts.length<6){
-        alert("Please enter a valid tweet url: https://x.com/username/status/{tweetID: 1791806895335837804}");
+      if (parts.length < 6) {
+        alert(
+          "Please enter a valid tweet url: https://x.com/username/status/{tweetID: 1791806895335837804}"
+        );
         return;
-      
       }
       setUsername(parts[3]);
     }
     console.log(Username);
-    if(Tip<=0){
+    if (Tip <= 0) {
       alert("Please enter a valid tip amount");
       return;
     }
-    setShowPreview(true);
+    setLoading(true);
+    setTimeout(() => {
+      setShowPreview(true);
+    }, 1000);
   };
 
   useEffect(() => {
-    if(showPreview){
-      document.getElementById("preview").scrollIntoView({ behavior: "smooth" });
+    if (showPreview) {
+      setLoading(false);
+      setTimeout(() => {
+        document
+          .getElementById("preview")
+          .scrollIntoView({ behavior: "smooth" });
+      }, 1500);
     }
   }, [showPreview]);
+
+  useEffect(() => {
+    if (TransactionProcessing) {
+      const preview = document.getElementsByClassName("TweetPreview")[0];
+      if (preview) {
+        preview.style.display = "none";
+      }
+    }
+  });
 
   const paytip = async () => {
     try {
       await switchNetwork();
       console.log(Username);
       const provider = new ethers.BrowserProvider(window.ethereum);
-      // Request account access if needed
+      
       await provider.send("eth_requestAccounts", []);
 
-      // Get the signer
       const signer = await provider.getSigner();
       const signerBalance = await provider.getBalance(signer.address);
-      // Define the contract address and ABI
+
       const contractAddress = ContractAdd;
       const contractABI = [
         "function tip(string memory username) public payable",
       ];
 
-      // Initialize the contract
       const contract = new ethers.Contract(
         contractAddress,
         contractABI,
         signer
       );
 
-      // Parse the tip amount to wei
       const tipAmount = ethers.parseEther(Tip.toString());
-      // Call the tip function with the username and send the tip amount as msg.value
       if (tipAmount > signerBalance) {
         alert(
           "Insufficient Funds for the Transaction, Please enter a valid ammount"
@@ -121,16 +140,17 @@ const TipForm = (provider) => {
       } else {
         console.log(Tip, " mybal", signerBalance);
       }
+      setTransactionProcessing(true);
+      setExplorer(networkParams[currentProvider].blockExplorerUrls);
       const tx = await contract.tip(Username, { value: tipAmount });
 
-      // Wait for the transaction to be mined
       await tx.wait();
       withdrawn();
-      // Log the transaction details
-      console.log(tx);
-      console.log("Tip sent");
+      setTransactionProcessing(false);
+      setTipSent(tx.hash);
     } catch (err) {
       console.log(err.message);
+      setTransactionProcessing(false);
       if (err.message.includes("User denied transaction signature")) {
         alert("Please confirm the transaction to tip the tweet");
       }
@@ -160,30 +180,52 @@ const TipForm = (provider) => {
     setShowPreview(false); // Hide the preview when any input changes
   };
 
+  const HashLink = (hash) => {
+    if(Explorer && hash)
+    return Explorer+hash;
+  }
+
   return (
-    <div className="TipForm" id="Tip-A-Tweet">
-      <h1>Tip a Tweet</h1>
-      <input
-        type="text"
-        className="tweetInput"
-        placeholder="Enter Tweet url"
-        onChange={handleInputChange(setUrl)}
-      />
-      <input
-        type="number"
-        className="tweetInput"
-        placeholder="Enter your tip Amount"
-        onChange={handleInputChange(setTip)}
-      />
-      <div className="labels">
-        <button onClick={tipform}>Tip the tweet</button>
-      </div>
-      {showPreview && Username && (
-        <div className="tweet" id="preview">
-          {" "}
-          <TweetPreview url={Url} payTip={paytip} />{" "}
+    <div className="Tip-Page">
+      <img src={ether} alt="logo" />
+      <div className="TipForm" id="Tip-A-Tweet">
+        <h1>Tip a Tweet</h1>
+        <input
+          type="text"
+          className="tweetInput"
+          placeholder="Enter Tweet url"
+          onChange={handleInputChange(setUrl)}
+        />
+        <input
+          type="number"
+          className="tweetInput"
+          placeholder="Enter your tip Amount"
+          onChange={handleInputChange(setTip)}
+        />
+        <div className="labels">
+          <button onClick={tipform}>Tip the tweet</button>
         </div>
-      )}
+        {showPreview && Username && (
+          <div className="tweet" id="preview">
+            {" "}
+            <TweetPreview url={Url} payTip={paytip} />{" "}
+          </div>
+        )}
+        {loading && (
+          <div className="loading">
+            <Loading />
+          </div>
+        )}
+        {TransactionProcessing && (
+          <span>
+            Processing Transaction
+            <div className="loading">
+              <Loading />
+            </div>
+          </span>
+        )}
+        {TipSent && <span>Tip Sent with Hash: {HashLink}</span>}
+      </div>
     </div>
   );
 };

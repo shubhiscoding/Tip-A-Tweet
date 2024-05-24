@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import "../Styles/TwitterLogin.css";
+import Loading from "./loading";
 
 const Withdraw = (data) => {
   const [Tip, setTip] = useState(null);
   const [signer, setSigner] = useState(null);
-  const Username = data['data']["Username"];
-  const currentProvider = data['data']["networkProvider"];
+  const Username = data["data"]["Username"];
+  const currentProvider = data["data"]["networkProvider"];
+  const [loading, setLoading] = useState(false);
 
   const networkParams = {
     "Sepolia ETH": {
@@ -30,7 +32,6 @@ const Withdraw = (data) => {
   };
 
   const ContractAdd = networkParams[currentProvider].contractAddress;
-
 
   const switchNetwork = async () => {
     if (!window.ethereum) throw new Error("No crypto wallet found");
@@ -56,7 +57,6 @@ const Withdraw = (data) => {
     }
   };
 
-
   const paytip = async () => {
     try {
       switchNetwork();
@@ -75,9 +75,7 @@ const Withdraw = (data) => {
         contractABI,
         signer
       );
-
       const tx = await contract.ammountOfTip(Username);
-
       setTip(tx.toString());
     } catch (err) {
       console.log(err);
@@ -89,11 +87,13 @@ const Withdraw = (data) => {
     const contractAddress = ContractAdd;
     const withdrawABI = ["function withdraw(string memory username) public"];
     const contract = new ethers.Contract(contractAddress, withdrawABI, signer);
+    setLoading(true);
     const tx = await contract.withdraw(Username);
     tx.wait().then((receipt) => {
       console.log("Withdrawn");
       console.log(receipt["hash"]);
     });
+    setLoading(false);
     console.log(tx);
     handleRefresh();
   };
@@ -104,15 +104,18 @@ const Withdraw = (data) => {
 
   const handleRefresh = () => {
     setTip(null);
+    setLoading(true);
     setTimeout(() => {}, 10000);
+    setLoading(false);
     paytip();
   };
 
   return (
     <div className="Withdraw">
-      {Tip ? (
-        <div>
+      {Tip && !loading ? (
+        <div className="withdraw-block">
           <div className="balance">
+            {loading && <Loading />}
             <p>You have {ethers.formatEther(Tip.toString())} tips!</p>
             <button className="refresh" onClick={handleRefresh}>
               Refresh
@@ -125,7 +128,9 @@ const Withdraw = (data) => {
           </div>
         </div>
       ) : (
-        <p>Loading</p>
+        <div className="loading">
+          <Loading />
+        </div>
       )}
     </div>
   );
