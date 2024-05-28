@@ -24,7 +24,7 @@ const TipForm = (provider) => {
       rpcUrls: ["https://rpc.sepolia.org"],
       nativeCurrency: { name: "Ethereum", symbol: "ETH", decimals: 18 },
       blockExplorerUrls: ["https://sepolia.etherscan.io/tx/"],
-      contractAddress: "0x6Bf6dc601F0eD1E688b5a49c48d75696057099F4",
+      contractAddress: "0x9d356bf3f6B154Da52a3eEa5F686480de52Aa8e9",
     },
     "Amoy Matic": {
       chainId: "0x13882", // Chain ID for Mumbai (Polygon Testnet)
@@ -33,7 +33,7 @@ const TipForm = (provider) => {
       rpcUrls: ["https://rpc-amoy.polygon.technology/"],
       nativeCurrency: { name: "Matic", symbol: "MATIC", decimals: 18 },
       blockExplorerUrls: ["https://www.oklink.com/amoy/tx/"],
-      contractAddress: "0x2d61C3fe1188CFb16ABaA387c7F66Fedfa8D3158",
+      contractAddress: "0x7E90f2E631345D3F1e1056CaD15a2553360Dd73d",
     },
   };
 

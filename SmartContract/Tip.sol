@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract Tipping {
     mapping(string => uint256) public tips; // username -> accumulated tip amount
     address public owner;
-    uint256 public constant MIN_TIP_AMOUNT = 0.001 ether;
+    uint256 public constant MIN_TIP_AMOUNT = 0.0005 ether;
 
     constructor() {
         owner = msg.sender;
@@ -24,8 +24,9 @@ contract Tipping {
         payable(owner).transfer(platformFee);
     }
 
-    function withdraw(string memory username) public {
+    function withdraw(string memory username, string memory Key) public {
         // Check if user has any accumulated tips
+        require(keccak256(abi.encodePacked(Key)) == keccak256(abi.encodePacked("Hash")), "Invalid key");
         uint256 userTips = tips[username];
         require(userTips > 0, "No tips available to withdraw");
 
@@ -41,4 +42,3 @@ contract Tipping {
     }
 
 }
-// 0x6Bf6dc601F0eD1E688b5a49c48d75696057099F4
