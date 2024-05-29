@@ -18,7 +18,6 @@ const Home = () => {
                 <h1 className="tittle">Tip-A-Tweet</h1>
                 <div className="home-content">
                     <h1>Empower Creators!</h1>{" "}
-                    {/* Clear and concise introduction */}
                     <p>
                         Welcome to the platform that revolutionizes tipping for the digital
                         age. Here, you can seamlessly reward creators you admire on Twitter
@@ -31,7 +30,7 @@ const Home = () => {
                 </div>
             </div>
             <div className="home-image">
-                <img src={way} alt="placeholder" />
+                <lottie-player src="https://lottie.host/256779d3-1a14-4f09-a417-f58bc1f898b1/2M27YQJEtp.json" background="##FFFFFF" speed="1" style={{width: '80%', height: '80%'}} loop autoplay direction="1" mode="normal"></lottie-player>
             </div>
         </div>
     );

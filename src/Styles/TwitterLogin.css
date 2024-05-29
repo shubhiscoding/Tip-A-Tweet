@@ -1,22 +1,23 @@
-.TwitterLogin {
+.User-details {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  background-color: #010001; /* Dark background */
   color: #ffffff;
-  width: 100%;
-  min-width: 40vw;
   min-height: 40vh;
   font-size: 20px;
   border-radius: 10px;
   padding: 2rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
   margin-top: 6rem;
 }
+.Withdraw-Content{
+  display: flex;
+  justify-content: center;
+}
 
-
+.TwitterLogin{
+  min-height: 100vh;
+}
 
 .twitter-withdraw-btn {
   padding: 0.5rem 1.3rem;
@@ -45,6 +46,10 @@
   width:100%;
 }
 
+.name h1{
+  color: #1629ae;
+}
+
 .withdraw-block {
   display: flex;
   flex-direction: column;
@@ -57,7 +62,7 @@
 
 .TwitterLogin h1 {
   margin-bottom: 4rem;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 6rem;
 }
 
@@ -66,7 +71,7 @@
 }
 
 .tip-blue {
-  color: #4c1eb8;
+  color: rgba(250, 250, 255, 0.7);
 }
 
 .balance {
@@ -107,12 +112,6 @@
   min-width: 15%;
 }
 
-.refresh:hover{
-  background-color: white;
-  color: #010001;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-
-}
 
 .loading {
   display: flex;
@@ -122,4 +121,8 @@
   max-height: 2vw;
   min-height: 2vw;
   height: 100%;
+}
+
+.Withdraw{
+  width: 100%;
 }

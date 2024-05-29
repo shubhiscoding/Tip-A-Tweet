@@ -3,12 +3,6 @@ html {
     scroll-behavior: smooth;
 }
 
-.App{
-    background-color:#1e1e1e;
-    min-height:175vh;
-    padding:1rem;
-}
-
 .Tip-Page{
     display: flex;
     flex-direction: row;
@@ -24,15 +18,12 @@ html {
     display: flex;
     flex-direction: column;
     justify-content: start;
-    margin-top: 10rem;
     align-items: center;
     color: #ffffff;
     width: 100%;
     font-size: 20px;
     border-radius: 10px;
     padding: 2rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
 }
 
 .TipForm .labels {
@@ -47,10 +38,10 @@ html {
 
 .TipForm button {
     padding: 1rem 4rem;
-    border-radius: 20px;
+    border-radius: 40px;
+    box-size: border-box;
     background-color: #4e44ce; /* Neon accent */
     color: #ffffff;
-    border: none;
     transition: all 0.3s ease;
 }
 
@@ -58,12 +49,11 @@ html {
 .TipForm input[type="text"], 
 .TipForm input[type="Number"]{
     padding: 1rem 2rem;
-    border-radius: 20px;
+    border-radius: 40px;
     font-size: 20px;
     min-width: 30vw;
-    background-color: #2e2e3e;
-    color: #ffffff;
-    border: 1px solid #4e44ce;
+    color: black;
+    border: 3px solid #6a76d1;
     margin-bottom: 1rem;
     transition: all 0.3s ease;
     box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
@@ -112,9 +102,8 @@ html {
     align-items: center;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-    background-color: #2e2e3e; /* Dark background */
+    /* background-color: #2e2e3e; Dark background */
     padding: 1rem;
-    gap: 20px;
     width: 80%; /* Ensure it doesn't take too much space */
     margin: 1rem 0;
     overflow: hidden; /* Prevent overflow */
@@ -126,16 +115,16 @@ html {
     margin: 0;
     border-radius: 10px;
     min-width: 400px;
-    max-height: 500px;
+    max-height: 45%;
     overflow: hidden; /* Prevent overflow */
 }
 
 .TweetPreview .confirm-btn {
     padding: 0.5rem 2rem;
-    border-radius: 15px;
-    background-color: #4e44ce; /* Neon accent */
+    border-radius: 30px;
+    /* background-color: #4e44ce; Neon accent */
     color: #ffffff;
-    border: none;
+    /* border: none; */
     transition: all 0.3s ease;
 }
 

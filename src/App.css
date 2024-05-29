@@ -1,6 +1,9 @@
 .App{
   padding: 0;
   margin: 0;
+  width:100%;
+  height: 100%;
   box-sizing: border-box; 
   background-color: #010001;
+  background: linear-gradient(to right, #6a76d1, #4453c2, #1629ae);
 }

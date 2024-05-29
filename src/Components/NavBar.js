@@ -32,9 +32,6 @@ const NavBar = () => {
                 <option value="Amoy Matic">Amoy Matic</option>
             </select>
             </div>
-            <div className="nav-links">
-                <a href="#claim-tips">Claim Tips</a>
-            </div>
         </nav>
     );
 }

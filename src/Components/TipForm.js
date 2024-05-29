@@ -195,7 +195,8 @@ const TipForm = (provider) => {
 
   return (
     <div className="Tip-Page">
-      <img src={ether} alt="logo" />
+      <lottie-player src="https://lottie.host/de5d2b44-6f66-4b0a-a3ee-c1382da7aecf/Ku8FulinD6.json" background="transparent" speed="1" style={{width: '100%', height: '100%'}} loop autoplay direction="1" mode="normal"></lottie-player>
+      
       <div className="TipForm" id="Tip-A-Tweet">
         <h1>Tip a Tweet</h1>
         <input

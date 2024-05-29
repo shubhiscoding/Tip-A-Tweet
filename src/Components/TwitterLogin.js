@@ -90,20 +90,23 @@ const TwitterLogin = (currentProvider) => {
 
   return (
     <div className="TwitterLogin" id="claim-tips">
-      <div className="name"><h1>Claim Your <span className="tip-blue">Tips</span></h1></div>
-      {user ? (
-        <div className="User-details">
-          <h2>Hii, {Username}!</h2>
-          <Withdraw data={data} />
-          <button onClick={handleLogout} className="twitter-logout-btn">Logout</button>
-        </div>
-      ) : (
-        <div>
-          <button onClick={handleTwitterLogin} className="twitter-login-btn">
-            Login with Twitter
-          </button>
-        </div>
-      )}
+    <div className="name"><h1>Claim Your <span className="tip-blue">Tips</span></h1></div>
+      <div className="Withdraw-Content">
+        {user ? (
+          <div className="User-details">
+            <h2>Hii, {Username}!</h2>
+            <Withdraw data={data} />
+            <button onClick={handleLogout} className="twitter-logout-btn">Logout</button>
+          </div>
+        ) : (
+          <div>
+            <button onClick={handleTwitterLogin} className="twitter-login-btn">
+              Login with Twitter
+            </button>
+          </div>
+        )}
+      {user && <dotlottie-player src="https://lottie.host/96a0a6ae-d333-4a22-bebb-52b8b9265d11/RRWSkQc4lT.json" background="transparent" speed="1" style={{width: '40%', height: '40%'}} loop autoplay></dotlottie-player>}
+      </div>
     </div>
   );
 };

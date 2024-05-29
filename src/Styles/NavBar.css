@@ -5,13 +5,14 @@ html {
 
 .NavBar {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     font-size: 18px;
     border-radius: 10px;
     color: white;
     padding-left: 6rem;
     padding-right: 4rem;
+    background: linear-gradient(to right, #6a76d1, #4453c2, #1629ae);
     font-size: 2rem;
     margin:0;
 }
@@ -52,16 +53,17 @@ html {
     justify-content: center;
     padding-top: 1rem; /* Remove any padding */
     padding-right: 4rem;
-    background-color: #010001;
+    /* background-color: #010001; */
+    /* background: linear-gradient(to right, #6a76d1, #4453c2, #1629ae); */
     color: #fff;
-    margin: 0; /* Remove any margin */
+    margin-top: 1rem;
   }
   
   .Networks select {
     padding: 0.5rem 6rem;
     border-radius: 20px;
     font-size: 20px;
-    background-color: #010001;
+    background: transparent;
     color: #ffffff;
     border: 1px solid white;
     margin-bottom: 1rem;
