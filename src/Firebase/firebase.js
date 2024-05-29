@@ -11,7 +11,7 @@ const firebaseConfig = {
   projectId: "tip-a-tweet",
   storageBucket: "tip-a-tweet.appspot.com",
   messagingSenderId: "884623357517",
-  appId: "1:884623357517:web:a3caebbe1fc633c2144e04"
+  appId: "1:884623357517:web:a3caebbe1fc633c2144e04",
 };
 
 const app = initializeApp(firebaseConfig);

@@ -9,6 +9,8 @@ const Withdraw = (data) => {
   const Username = data["data"]["Username"];
   const currentProvider = data["data"]["networkProvider"];
   const [loading, setLoading] = useState(false);
+  const [TxHash, setTxHash] = useState("");
+  const [Explorer, setExplorer] = useState("");
   const Key = process.env.REACT_APP_HASH;
 
   const networkParams = {
@@ -18,7 +20,7 @@ const Withdraw = (data) => {
       chainName: "Sepolia Test Network",
       rpcUrls: ["https://rpc.sepolia.org"],
       nativeCurrency: { name: "Ethereum", symbol: "ETH", decimals: 18 },
-      blockExplorerUrls: ["https://sepolia.etherscan.io"],
+      blockExplorerUrls: ["https://sepolia.etherscan.io/tx/"],
       contractAddress: "0x9d356bf3f6B154Da52a3eEa5F686480de52Aa8e9",
     },
     "Amoy Matic": {
@@ -27,7 +29,7 @@ const Withdraw = (data) => {
       chainName: "Amoy Test Network",
       rpcUrls: ["https://rpc-amoy.polygon.technology/"],
       nativeCurrency: { name: "Matic", symbol: "MATIC", decimals: 18 },
-      blockExplorerUrls: ["https://www.oklink.com/amoy"],
+      blockExplorerUrls: ["https://www.oklink.com/amoy/tx/"],
       contractAddress: "0x7E90f2E631345D3F1e1056CaD15a2553360Dd73d",
     },
   };
@@ -76,6 +78,7 @@ const Withdraw = (data) => {
         contractABI,
         signer
       );
+      setExplorer(networkParams[currentProvider].blockExplorerUrls);
       const tx = await contract.ammountOfTip(Username);
       setTip(tx.toString());
     } catch (err) {
@@ -96,12 +99,19 @@ const Withdraw = (data) => {
     });
     setLoading(false);
     console.log(tx);
+    setTxHash(tx.hash);
     handleRefresh();
   };
 
   useEffect(() => {
     paytip();
   });
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTxHash(null);
+    }, 10000);
+  }, [TxHash]);
 
   const handleRefresh = () => {
     setTip(null);
@@ -110,6 +120,13 @@ const Withdraw = (data) => {
     setLoading(false);
     paytip();
   };
+
+  const HashLink = (hash) => {
+    console.log(Explorer, hash);
+    if(Explorer && hash)
+    var link = Explorer + hash;
+    return link;
+  }
 
   return (
     <div className="Withdraw">
@@ -122,6 +139,7 @@ const Withdraw = (data) => {
               Refresh
             </button>
           </div>
+        {TxHash && <span>Tip Sent Successfully: <a href={HashLink(TxHash)} target="blank">View On Explorer!</a></span>}
           <div className="withdraw-btns">
             <button onClick={withdraw} className="twitter-withdraw-btn">
               Withdraw

@@ -63,6 +63,12 @@ const TipForm = (provider) => {
     }
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setTipSent(null);
+    }, 10000);
+  }, [TipSent]);
+
   const tipform = async () => {
     if (!Url || !Tip) {
       alert("Please enter a valid tweet url and tip amount");
@@ -181,8 +187,10 @@ const TipForm = (provider) => {
   };
 
   const HashLink = (hash) => {
+    console.log(Explorer, hash);
     if(Explorer && hash)
-    return Explorer+hash;
+    var link = Explorer + hash;
+    return link;
   }
 
   return (
@@ -224,7 +232,7 @@ const TipForm = (provider) => {
             </div>
           </span>
         )}
-        {TipSent && <span>Tip Sent with Hash: {HashLink}</span>}
+        {TipSent && <span>Tip Sent Successfully: <a href={HashLink(TipSent)} target="blank">View On Explorer!</a></span>}
       </div>
     </div>
   );
