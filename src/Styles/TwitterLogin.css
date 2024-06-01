@@ -19,6 +19,16 @@
   min-height: 100vh;
 }
 
+.login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login button{
+  max-height: 3rem;
+}
+
 .twitter-withdraw-btn {
   padding: 0.5rem 1.3rem;
   border-radius: 20px;

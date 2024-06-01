@@ -1,3 +1,16 @@
+.SplashScreen{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+
 .home {
     display: flex;
     position: relative;
@@ -32,6 +45,24 @@ lottie-player {
     color: white;
     margin: 0;
 }
+
+@keyframes float {
+    0% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(5px, -5px);
+    }
+    50% {
+      transform: translate(0, -10px);
+    }
+    75% {
+      transform: translate(-5px, -5px);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
 
 .home-content p {
     font-size: 1.5rem;

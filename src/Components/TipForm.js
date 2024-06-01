@@ -35,6 +35,15 @@ const TipForm = (provider) => {
       blockExplorerUrls: ["https://www.oklink.com/amoy/tx/"],
       contractAddress: "0x7E90f2E631345D3F1e1056CaD15a2553360Dd73d",
     },
+    "Base Sepolia Testnet": {
+      chainId: "0x14a34",
+      chain: "84532",
+      chainName: "Base Sepolia Test Network",
+      rpcUrls: ["https://base-sepolia.blockpi.network/v1/rpc/public"],
+      nativeCurrency: { name: "Ethereum", symbol: "ETH", decimals: 18 },
+      blockExplorerUrls: ["https://base-sepolia.blockscout.com/tx/"],
+      contractAddress: "0xBA9420F21bc1B7AdB0c604e2452c210fc82b7089",
+    },
   };
 
   const ContractAdd = networkParams[currentProvider].contractAddress;

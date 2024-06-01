@@ -30,6 +30,7 @@ const NavBar = () => {
             >
                 <option value="Sepolia ETH">Sepolia ETH</option>
                 <option value="Amoy Matic">Amoy Matic</option>
+                <option value="Base Sepolia Testnet">Base Sepolia</option>
             </select>
             </div>
         </nav>

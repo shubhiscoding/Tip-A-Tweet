@@ -6,9 +6,21 @@ import "./Styles/TipForm.css";
 import "./App.css";
 import { BrowserRouter as Route } from "react-router-dom";
 import { useEffect, useState } from "react";
+import SplashScreen from "./Components/SplashScreen";
 
 function App() {
   const [currentProvider, setCurrentProvider] = useState("Sepolia ETH");
+  const [isSplashVisible, setIsSplashVisible] = useState(true);
+
+  useEffect(() => {
+    if(document.querySelector(".animate")) {
+      setIsSplashVisible(false);
+    }
+  }, []);
+
+  const handleLottieLoaded = () => {
+    setIsSplashVisible(false);
+  };
 
   useEffect(() => {
     if (localStorage.getItem("currentProvider")) {
@@ -20,9 +32,11 @@ function App() {
 
   return (
     <div className="App">
+    {isSplashVisible &&
+      <SplashScreen onAnimationComplete={handleLottieLoaded} />}
       <header className="App-header" id="home">
         <NavBar />
-        <Home />
+        <Home onLottieLoaded={handleLottieLoaded} />
         <TipForm provider={currentProvider} />
         <TwitterLogin currentProvider={currentProvider} />
       </header>

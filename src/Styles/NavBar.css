@@ -17,6 +17,20 @@ html {
     margin:0;
 }
 
+#providerSelect{
+    background-color: #6c63ff;
+    outline: none;
+}
+
+#providerSelect option{
+    border-radius: 10px;
+}
+
+#providerSelect:focus {
+    border-color: #007BFF; /* Optional: Change border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Optional: Add a shadow on focus */
+}
+
 .nav-logo h1{
     font-size: 4rem;
     font-weight: bold;
